@@ -2,7 +2,7 @@
 // and from any other device on the same LAN (e.g. 192.168.0.181).
 const _backendHost =
     typeof window !== "undefined" ? window.location.hostname : "localhost";
-export const API_BASE = `http://${_backendHost}:8000`;
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || `http://${_backendHost}:8000`;
 
 /* ─── Types ──────────────────────────────────────────────── */
 
@@ -316,7 +316,7 @@ export const api = {
 
         // Transform overview into AdminStats format for compatibility
         const stats: AdminStats = {
-            total_grievances: Object.values(overview.by_status || {}).reduce((a: any, b: any) => a + b, 0),
+            total_grievances: (Object.values(overview.by_status || {}) as any[]).reduce((a: number, b: any) => a + (Number(b) || 0), 0),
             pending: (overview.by_status?.submitted || 0) + (overview.by_status?.pending || 0),
             pending_confirmation: Number(overview.pending_ai_confirmation || 0),
             in_progress: (overview.by_status?.assigned || 0) + (overview.by_status?.in_progress || 0),
