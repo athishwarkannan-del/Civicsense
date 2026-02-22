@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Branding Palette - Burgundy Theme */
+  --color-primary-600: #800020;
+  /* Brand Burgundy */
+  --color-primary-700: #66001a;
+  --color-primary-800: #4d0013;
+  --color-primary-900: #33000d;
+  /* Deep Burgundy / Navbar fallback */
+
+  --color-accent-saffron: #ff9933;
+  /* Standard Saffron */
+  --color-accent-saffron-deep: #e66b3d;
+  /* Logo / Emphasis Saffron */
+  --color-accent-green: #046A38;
+  /* India Green */
+  --color-accent-gold: #fdb813;
+  /* Primary Action Gold */
+
+  --color-status-success: #198754;
+  --color-status-error: #DC3545;
+  --color-status-warning: #FFC107;
+
+  --color-portal-bg: #ffffff;
+  /* Pure White Background */
+  --color-portal-bg-wash: #f0f8ff;
+  /* Light Blue Wash Background */
+  --color-portal-utility: #800020;
+  /* Top Utility Burgundy */
+  --color-portal-border: #D1D5DB;
+
+  --color-text-main: #333333;
+  --color-text-muted: #666666;
+  --color-text-navy: #800020;
+}
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-portal-bg text-text-main min-h-screen flex flex-col;
+    font-family: "Inter", "Noto Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-primary-700/20 text-primary-900;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 rounded-sm bg-primary-600 text-white font-bold text-sm uppercase tracking-wide hover:bg-primary-700 focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 active:scale-[0.98] transition-all duration-200 ease-out disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 rounded-sm bg-white text-primary-600 font-bold text-sm uppercase tracking-wide border border-primary-600 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 active:scale-[0.98] transition-all duration-200 ease-out disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center px-6 py-2.5 rounded-sm bg-red-700 text-white font-bold text-sm uppercase tracking-wide hover:bg-red-800 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-sm border border-gray-300 bg-white text-gray-900 text-sm placeholder:text-gray-400 focus:border-primary-600 focus:ring-1 focus:ring-primary-600 focus:outline-none transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-white rounded-sm shadow-sm border border-gray-200 p-6;
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-sm shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200;
+  }
+
+  .badge-in-progress {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200;
+  }
+
+  .badge-resolved {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200;
+  }
+
+  .badge-rejected {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-800 border border-red-200;
+  }
+
+  .badge-escalated {
+    @apply inline-flex items-center px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-purple-800 border border-purple-200;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-gray-200;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, #a52a2a 0%, #800020 50%, #66001a 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+  }
+
+  .gradient-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #2563eb, #1e3a8a);
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+  }
+}
+
+/* Slider animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255, 255, 255, 0.5) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  @apply rounded-xl z-0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}

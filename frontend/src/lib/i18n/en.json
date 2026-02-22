@@ -1,0 +1,52 @@
+{
+    "common": {
+        "government": "GOVERNMENT OF INDIA",
+        "ministry": "Ministry of Personnel, Public Grievances & Pensions",
+        "developed_by": "DEVELOPED BY",
+        "nic": "NIC INDIA"
+    },
+    "branding": {
+        "title": "CIVIC SENSE",
+        "highlight": "PORTAL",
+        "tagline": "AI-Powered Public Grievance Redressal System"
+    },
+    "nav": {
+        "home": "HOME",
+        "lodge": "LODGE PUBLIC GRIEVANCE",
+        "status": "VIEW STATUS",
+        "help": "FAQ/HELP",
+        "admin": "ADMIN PORTAL"
+    },
+    "auth": {
+        "signin": "SIGN IN",
+        "signup": "SIGN UP",
+        "welcome": "Welcome,"
+    },
+    "hero": {
+        "news_tag": "Official News & Updates",
+        "slide1_title": "Transforming Governance with AI Integration",
+        "slide1_desc": "Real-time tracking, intelligent classification, and faster redressal. Providing a transparent interface for every citizen."
+    },
+    "actions": {
+        "lodge_title": "Lodge Grievance",
+        "lodge_desc": "Submit your complaint with AI assistance",
+        "status_title": "Track Status",
+        "status_desc": "Check the progress of your grievance",
+        "appeal_title": "File Appeal",
+        "appeal_desc": "Escalate if not satisfied with resolution"
+    },
+    "stats": {
+        "title": "System Performance",
+        "subtitle": "Disposal Statistics",
+        "resolved": "Resolved (Last 30 Days)",
+        "received": "Received (Last 30 Days)",
+        "disposal": "Avg. Disposal Time"
+    },
+    "about": {
+        "title": "About THE SYSTEM",
+        "p1": "The AI-Powered Public Grievance Redressal System is an advanced platform designed to enhance the efficiency of citizen engagement with the government.",
+        "p2": "Built using cutting-edge Artificial Intelligence, the system automatically categorizes grievances, identifies urgent matters, and routes them to the appropriate department with minimal delay.",
+        "p3": "Our goal is to ensure 100% transparency and provide timely justice to every citizen's concern.",
+        "learn_more": "Learn More About AI Integration"
+    }
+}
