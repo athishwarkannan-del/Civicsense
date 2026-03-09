@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { api, debounce, type ClassificationResult, getCurrentUser } from "@/lib/api";
@@ -178,34 +178,49 @@ export default function LodgeGrievancePage() {
         }
     }, [form.state, form.district, form.pincode, form.address, geocodeAddress]);
 
+    const previewsRef = useRef<string[]>([]);
+
     // Image handling
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files || []);
         const valid = files.filter((f) => f.type.startsWith("image/") && f.size <= 10 * 1024 * 1024);
         setImageFiles((prev) => [...prev, ...valid]);
 
-        valid.forEach((f) => {
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                setImagePreviews((prev) => [...prev, ev.target?.result as string]);
-            };
-            reader.readAsDataURL(f);
+        const newPreviews = valid.map(f => {
+            const url = URL.createObjectURL(f);
+            previewsRef.current.push(url);
+            return url;
         });
+        setImagePreviews((prev) => [...prev, ...newPreviews]);
     };
 
     const removeImage = (idx: number) => {
         setImageFiles((prev) => prev.filter((_, i) => i !== idx));
-        setImagePreviews((prev) => prev.filter((_, i) => i !== idx));
+        setImagePreviews((prev) => {
+            const url = prev[idx];
+            if (url.startsWith("blob:")) {
+                URL.revokeObjectURL(url);
+                previewsRef.current = previewsRef.current.filter(u => u !== url);
+            }
+            return prev.filter((_, i) => i !== idx);
+        });
     };
 
     const handleCameraCapture = (file: File) => {
         setImageFiles((prev) => [...prev, file]);
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            setImagePreviews((prev) => [...prev, ev.target?.result as string]);
-        };
-        reader.readAsDataURL(file);
+        const url = URL.createObjectURL(file);
+        previewsRef.current.push(url);
+        setImagePreviews((prev) => [...prev, url]);
     };
+
+    // Cleanup object URLs ONLY on unmount
+    useEffect(() => {
+        return () => {
+            previewsRef.current.forEach(url => {
+                if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+            });
+        };
+    }, []);
 
     // Audio recording
     const startRecording = async () => {

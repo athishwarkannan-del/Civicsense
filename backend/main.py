@@ -5,11 +5,11 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 
+load_dotenv()
+
 from .database.indexes import create_indexes
 from .routers import auth, grievances, admin, user, media, chat
 from .routers.admin_analytics import router as analytics_router
-
-load_dotenv()
 
 app = FastAPI(
     title="AI-Powered Public Grievance Redressal System",
@@ -30,6 +30,8 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
+        "https://civicsense-frontend-rqr3.onrender.com",
+        "https://civicsense-frontend.onrender.com", # Generic
         # LAN access – other devices on the local network
         "http://192.168.0.181:3000",
         "http://192.168.0.181:8000",

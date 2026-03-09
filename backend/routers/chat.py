@@ -110,7 +110,8 @@ def _generate_quick_replies(assistant_reply: str) -> list[str]:
 # ── Endpoint ────────────────────────────────────────────────────
 @router.post("", response_model=ChatResponse)
 async def chat(req: ChatRequest):
-    if not MISTRAL_API_KEY:
+    api_key = os.getenv("MISTRAL_API_KEY")
+    if not api_key:
         raise HTTPException(status_code=500, detail="Mistral API key not configured")
 
     # Build messages with system prompt
@@ -123,7 +124,7 @@ async def chat(req: ChatRequest):
             resp = await client.post(
                 MISTRAL_URL,
                 headers={
-                    "Authorization": f"Bearer {MISTRAL_API_KEY}",
+                    "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json",
                 },
                 json={

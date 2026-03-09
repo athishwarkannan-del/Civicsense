@@ -2,7 +2,9 @@
 // and from any other device on the same LAN (e.g. 192.168.0.181).
 const _backendHost =
     typeof window !== "undefined" ? window.location.hostname : "localhost";
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || `http://${_backendHost}:8000`;
+const _rawBase = process.env.NEXT_PUBLIC_API_URL || `http://${_backendHost}:8000`;
+// Remove trailing /api if it exists to prevent duplication in fetch calls
+export const API_BASE = _rawBase.replace(/\/api$/, "");
 
 /* ─── Types ──────────────────────────────────────────────── */
 
@@ -190,6 +192,7 @@ export const api = {
             full_name: data.full_name ?? data.name ?? "",
             email: data.email,
             password: data.password,
+            phone: data.phone, // Pass phone number
         };
         const res = await fetch(`${API_BASE}/api/auth/register`, {
             method: "POST",
