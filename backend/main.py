@@ -31,10 +31,8 @@ app.add_middleware(
         "http://localhost:8000",
         "http://127.0.0.1:8000",
         "https://civicsense-frontend-rqr3.onrender.com",
-        "https://civicsense-frontend.onrender.com", # Generic
-        # LAN access – other devices on the local network
-        "http://192.168.0.181:3000",
-        "http://192.168.0.181:8000",
+        "https://civicsense-frontend.onrender.com",
+        "https://backend-athishwar-2026.onrender.com", # Allow backend URL too
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -53,6 +51,13 @@ async def startup_event():
         if await check_connection():
             await create_indexes()
             print("✅ DB connected and indexes created.")
+            
+            # Chatbot Key Verification
+            chat_key = os.getenv("MISTRAL_API_KEY")
+            if chat_key:
+                print(f"✅ MISTRAL_API_KEY loaded (Length: {len(chat_key)})")
+            else:
+                print("❌ MISTRAL_API_KEY IS MISSING from environment!")
         else:
             print("⚠️  Could not connect to MongoDB. Running in degraded mode.")
     except Exception as e:

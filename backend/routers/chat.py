@@ -112,7 +112,8 @@ def _generate_quick_replies(assistant_reply: str) -> list[str]:
 async def chat(req: ChatRequest):
     api_key = os.getenv("MISTRAL_API_KEY")
     if not api_key:
-        raise HTTPException(status_code=500, detail="Mistral API key not configured")
+        print("CRITICAL ERROR: Chatbot attempted to run but MISTRAL_API_KEY is null!")
+        raise HTTPException(status_code=500, detail="Mistral API key not configured on server")
 
     # Build messages with system prompt
     api_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
