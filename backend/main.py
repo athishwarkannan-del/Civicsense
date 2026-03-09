@@ -31,6 +31,7 @@ app.add_middleware(
         "http://localhost:8000",
         "http://127.0.0.1:8000",
         "https://civicsense-frontend-rqr3.onrender.com",
+        "https://civicsense-frontend-m8sr.onrender.com", # Exact live URL
         "https://civicsense-frontend.onrender.com",
         "https://backend-athishwar-2026.onrender.com", # Allow backend URL too
     ],
